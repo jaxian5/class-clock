@@ -2,72 +2,91 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Clock</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
     <main class="container">
 
         <header class="header">
-
-            <div class="logo">
-                CLASS CLOCK
+            <div class="brand">
+                <div class="brand-icon">▣</div>
+                <div class="logo">BSIT 2-1</div>
+                <div class="section-subtitle">(Ajill 2026)</div>
             </div>
 
-            <div class="status">
-                <span class="status-dot"></span>
-                ONLINE
-            </div>
+            <div class="header-right">
 
+                <button id="notification-toggle" class="notification-toggle" type="button" title="Enable class notifications">
+                    <span id="notification-icon">🔕</span>
+                    <span id="notification-label">NOTIFY</span>
+                </button>
+                <div class="status">
+                    <span class="status-dot"></span>
+                    ONLINE
+                </div>
+
+                <div class="header-divider"></div>
+
+                <div class="clock-now">
+                    <div id="current-date">LOADING DATE</div>
+                    <strong id="current-time">00:00:00</strong>
+                </div>
+            </div>
         </header>
 
 
-        <section class="hero">
+        <section class="hero" id="hero">
 
-            <p id="status">
-                TIME LEFT BEFORE:
-            </p>
+            <div class="hero-info">
+                <p id="status">TIME LEFT BEFORE:</p>
 
-            <h1 id="event">
-                Loading...
-            </h1>
+                <h1 id="event">Loading...</h1>
 
-            <div id="countdown">
-                00:00:00
+                <div class="class-meta">
+                    <span id="next-day">—</span>
+                    <span class="meta-separator">•</span>
+                    <span class="time-pair">
+                        <span id="schedule">—</span>
+                        <span id="schedule-12">—</span>
+                    </span>
+                </div>
             </div>
 
-            <p id="schedule"></p>
+            <div class="hero-countdown">
+                <div id="countdown">00:00:00</div>
+                <div class="countdown-labels">
+                    <span>HOURS</span>
+                    <span>MINUTES</span>
+                    <span>SECONDS</span>
+                </div>
+            </div>
 
         </section>
 
-
-        <div class="divider"></div>
-
+        <div class="floating-class-status" id="floating-class-status" aria-hidden="true">
+            <div class="floating-note-title" id="floating-note-title">NEXT CLASS</div>
+            <div class="floating-note-text" id="floating-note-text">Calculating...</div>
+        </div>
 
         <section class="schedule-section">
 
-            <div class="section-title">
-                WEEKLY SCHEDULE
+            <div class="section-heading">
+                <div>
+                    <div class="section-title">WEEKLY SCHEDULE</div>
+                    <div class="section-subtitle">For the First Semester of A.Y 2026-2027</div>
+                </div>
             </div>
 
-            <div id="schedule-list">
-            </div>
+            <div id="schedule-list"></div>
 
         </section>
 
     </main>
-
 
     <script src="script.js"></script>
 
