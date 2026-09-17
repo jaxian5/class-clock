@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Clock</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20">
 </head>
 
 <body>
@@ -16,10 +16,11 @@
             <div class="brand">
                 <div class="brand-icon">▣</div>
                 <div class="logo">BSIT 2-1</div>
-                <div class="section-subtitle">(Ajill 2026)</div>
             </div>
 
             <div class="header-right">
+
+                <a href="admin.html" class="nav-link" title="Go to Admin">ADMIN</a>
 
                 <button id="notification-toggle" class="notification-toggle" type="button" title="Enable class notifications">
                     <span id="notification-icon">🔕</span>
@@ -68,17 +69,24 @@
 
         </section>
 
+        <!-- Between hero countdown and weekly schedule -->
+        <section class="all-button-section" id="all-button-section" aria-label="View mode">
+            <button type="button" id="view-mode-toggle" class="view-mode-toggle">
+                ALL TASKS
+            </button>
+        </section>
+
         <div class="floating-class-status" id="floating-class-status" aria-hidden="true">
             <div class="floating-note-title" id="floating-note-title">NEXT CLASS</div>
             <div class="floating-note-text" id="floating-note-text">Calculating...</div>
         </div>
 
-        <section class="schedule-section">
+        <section class="schedule-section" id="subjects-section">
 
             <div class="section-heading">
                 <div>
-                    <div class="section-title">WEEKLY SCHEDULE</div>
-                    <div class="section-subtitle">For the First Semester of A.Y 2026-2027</div>
+                    <div class="section-title" id="section-title">WEEKLY SCHEDULE</div>
+                    <div class="section-subtitle" id="section-subtitle">For the First Semester of A.Y 2026-2027</div>
                 </div>
             </div>
 
@@ -86,9 +94,28 @@
 
         </section>
 
+        <section class="schedule-section" id="tasks-section" hidden>
+
+            <div class="section-heading">
+                <div>
+                    <div class="section-title">ALL TASKS</div>
+                    <div class="section-subtitle">Sooner deadlines first · done last</div>
+                </div>
+            </div>
+
+            <div id="all-tasks-list" class="all-tasks-list"></div>
+
+        </section>
+
     </main>
 
-    <script src="script.js"></script>
+    <footer class="site-footer">
+        Class Clock Ver 2.9c.3 (An integrated site for BSIT 2-1)
+        <div class="section-title" id="section-title">Ajill Martin 2026</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js?v=20"></script>
 
 </body>
 

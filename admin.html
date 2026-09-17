@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Clock Admin</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <header class="admin-header">
+        <div>
+            <div class="brand">BSIT 2-1</div>
+            <div class="subtitle">ADMINISTRATION</div>
+        </div>
+
+        <div class="admin-header-actions">
+            <a href="index.html" class="nav-link" title="Back to Class Clock">CLASS CLOCK</a>
+            <button id="sign-out-button" class="sign-out-button" type="button" style="display: none;">
+                SIGN OUT
+            </button>
+            <div class="admin-status">
+                <span class="status-dot"></span>
+                ADMIN PANEL
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-container">
+
+        <section id="login-screen" class="login-screen">
+            <div class="login-card">
+                <div class="login-label">ADMIN ACCESS</div>
+                <h1>Class Clock Admin</h1>
+                <p>Sign in to manage the schedule for BSIT 2-1.</p>
+
+                <form id="login-form">
+                    <label for="email">EMAIL</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="admin@example.com"
+                        required
+                    >
+
+                    <label for="password">PASSWORD</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        required
+                    >
+
+                    <button type="submit" id="login-button">LOGIN</button>
+                    <div id="login-error" class="login-error"></div>
+                </form>
+            </div>
+        </section>
+
+        <section id="admin-panel" style="display: none;">
+
+            <nav class="admin-directory" id="admin-directory">
+                <button type="button" class="directory-button active" data-view="schedule">
+                    SCHEDULE
+                </button>
+                <button type="button" class="directory-button" data-view="tasks">
+                    TASKS
+                </button>
+            </nav>
+
+            <!-- SCHEDULE MANAGEMENT -->
+            <div id="schedule-view" class="admin-view">
+                <section class="page-heading">
+                    <p class="eyebrow">SCHEDULE MANAGEMENT</p>
+                    <h1>Class Clock Admin</h1>
+                    <p class="description">
+                        Manage today's classes and schedule exceptions.
+                    </p>
+                </section>
+
+                <section class="today-card">
+                    <div class="today-header">
+                        <div>
+                            <p class="eyebrow">TODAY</p>
+                            <h2 id="today-date">Loading...</h2>
+                        </div>
+
+                        <button id="no-classes-button" class="danger-button">
+                            NO CLASSES TODAY
+                        </button>
+                    </div>
+
+                    <div id="schedule-list" class="schedule-list">
+                        <div class="loading">
+                            Loading today's schedule...
+                        </div>
+                    </div>
+                </section>
+
+                <section class="info-card">
+                    <h2>How this works</h2>
+                    <p>
+                        Changes made here will create date-specific overrides.
+                        Your recurring weekly schedule will remain unchanged.
+                        Use UNSKIP to restore a skipped class for today.
+                    </p>
+                </section>
+            </div>
+
+            <!-- TASKS MANAGEMENT -->
+            <div id="tasks-view" class="admin-view" style="display: none;">
+                <section class="page-heading">
+                    <p class="eyebrow">TASKS MANAGEMENT</p>
+                    <h1>Class Tasks</h1>
+                    <p class="description">
+                        Create and manage tasks linked to your classes.
+                        These appear under each class on the public schedule.
+                    </p>
+                </section>
+
+                <section class="today-card">
+                    <div class="today-header">
+                        <div>
+                            <p class="eyebrow">ADD TASK</p>
+                            <h2>New task</h2>
+                        </div>
+                    </div>
+
+                    <form id="task-form" class="task-form">
+                        <div class="task-form-row">
+                            <div class="task-field">
+                                <label for="task-class">CLASS</label>
+                                <select id="task-class" required>
+                                    <option value="">Select a class...</option>
+                                </select>
+                            </div>
+                            <div class="task-field">
+                                <label for="task-due">DUE DATE</label>
+                                <input type="date" id="task-due">
+                            </div>
+                        </div>
+
+                        <div class="task-field">
+                            <label for="task-title">TITLE</label>
+                            <input
+                                type="text"
+                                id="task-title"
+                                placeholder="e.g. Finish lab exercise 3"
+                                required
+                            >
+                        </div>
+
+                        <div class="task-field">
+                            <label for="task-description">DESCRIPTION (optional)</label>
+                            <textarea
+                                id="task-description"
+                                rows="3"
+                                placeholder="Extra notes..."
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" id="task-submit" class="primary-button">
+                            ADD TASK
+                        </button>
+                        <div id="task-form-error" class="login-error"></div>
+                    </form>
+                </section>
+
+                <section class="today-card" style="margin-top: 25px;">
+                    <div class="today-header">
+                        <div>
+                            <p class="eyebrow">ALL TASKS</p>
+                            <h2>Task list</h2>
+                        </div>
+                    </div>
+
+                    <div id="tasks-list" class="schedule-list">
+                        <div class="loading">Loading tasks...</div>
+                    </div>
+                </section>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- MODIFY DEADLINE MODAL -->
+    <div id="modify-deadline-modal" class="modal" hidden>
+        <div class="modal-backdrop" data-close-modal="modify-deadline-modal"></div>
+        <div class="modal-card" role="dialog" aria-labelledby="modify-deadline-title">
+            <h2 id="modify-deadline-title">Modify deadline</h2>
+            <p class="modal-hint">Pick a new due date for this task.</p>
+            <label class="modal-label" for="modify-deadline-input">DUE DATE</label>
+            <input type="date" id="modify-deadline-input" class="modal-date-input">
+            <div class="modal-actions">
+                <button type="button" class="modal-secondary" id="modify-deadline-clear">CLEAR DATE</button>
+                <button type="button" class="modal-secondary" data-close-modal="modify-deadline-modal">CANCEL</button>
+                <button type="button" class="primary-button" id="modify-deadline-save">SAVE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHIFT CLASS MODAL -->
+    <div id="shift-modal" class="modal" hidden>
+        <div class="modal-backdrop" data-close-modal="shift-modal"></div>
+        <div class="modal-card" role="dialog" aria-labelledby="shift-modal-title">
+            <h2 id="shift-modal-title">Shift class mode</h2>
+            <p class="modal-hint">
+                Choose how this class will run today.
+                Once confirmed, the shift cannot be reverted until the day is finished.
+            </p>
+
+            <div class="shift-options">
+                <label class="shift-option">
+                    <input type="radio" name="shift-mode" value="Synchronous" checked>
+                    <span>Synchronous</span>
+                </label>
+                <label class="shift-option">
+                    <input type="radio" name="shift-mode" value="Asynchronous">
+                    <span>Asynchronous</span>
+                </label>
+                <label class="shift-option">
+                    <input type="radio" name="shift-mode" value="Others">
+                    <span>Others (Please Specify)</span>
+                </label>
+            </div>
+
+            <div id="shift-others-field" class="shift-others-field" hidden>
+                <label class="modal-label" for="shift-others-input">PLEASE SPECIFY</label>
+                <input type="text" id="shift-others-input" class="modal-date-input" placeholder="e.g. Hybrid / Makeup session">
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="modal-secondary" data-close-modal="shift-modal">CANCEL</button>
+                <button type="button" class="primary-button" id="shift-save">SAVE SHIFT</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js?v=9"></script>
+
+</body>
+</html>
