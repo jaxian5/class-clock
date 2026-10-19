@@ -79,6 +79,19 @@ body {
     border-bottom: 1px solid #1b2733;
 }
 
+.brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-mark {
+    width: 32px;
+    height: 32px;
+    display: block;
+    border-radius: 8px;
+}
+
 .brand {
     color: #ffffff;
     font-size: 18px;

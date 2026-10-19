@@ -96,14 +96,11 @@ body {
 }
 
 .brand-icon {
-    width: 30px;
-    height: 30px;
-    display: grid;
-    place-items: center;
-    border: 1px solid #5aaeff;
-    border-radius: 7px;
-    color: #6db8ff;
-    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    display: block;
+    border: 0;
+    border-radius: 8px;
 }
 
 .logo {
