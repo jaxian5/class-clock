@@ -6,6 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Clock</title>
     <link rel="stylesheet" href="style.css?v=20">
+    <style>
+        .download-app-link {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            padding: 7px 12px;
+            border: 1px solid #2b394a;
+            border-radius: 10px;
+            background: #111a24;
+            color: #d7e6f5;
+            text-decoration: none;
+            line-height: 1.15;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .download-app-link:hover {
+            border-color: #39a9ff;
+            color: #39a9ff;
+            background: rgba(57, 169, 255, 0.08);
+        }
+
+        .download-app-label {
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+        }
+
+        .download-app-note {
+            color: #7d91a6;
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        .download-app-link:hover .download-app-note {
+            color: #9ec8ef;
+        }
+
+        @media (max-width: 700px) {
+            .download-app-link {
+                padding: 6px 8px;
+            }
+
+            .download-app-note {
+                max-width: 92px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -19,6 +68,17 @@
             </div>
 
             <div class="header-right">
+
+                <a
+                    href="https://bit.ly/class-clock-installer"
+                    class="download-app-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Android only. iOS is not yet supported."
+                >
+                    <span class="download-app-label">DOWNLOAD APP</span>
+                    <span class="download-app-note">Android only · iOS not yet supported</span>
+                </a>
 
                 <a href="admin.html" class="nav-link" title="Go to Admin">ADMIN</a>
 
