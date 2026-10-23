@@ -9,11 +9,9 @@
     <link rel="stylesheet" href="style.css?v=21">
     <style>
         .download-app-link {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2px;
-            padding: 7px 12px;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
             border: 1px solid #2b394a;
             border-radius: 10px;
             background: #111a24;
@@ -35,24 +33,9 @@
             letter-spacing: 1.6px;
         }
 
-        .download-app-note {
-            color: #7d91a6;
-            font-size: 0.58rem;
-            font-weight: 600;
-            letter-spacing: 0.2px;
-        }
-
-        .download-app-link:hover .download-app-note {
-            color: #9ec8ef;
-        }
-
         @media (max-width: 700px) {
             .download-app-link {
                 padding: 6px 8px;
-            }
-
-            .download-app-note {
-                max-width: 92px;
             }
         }
     </style>
@@ -71,13 +54,11 @@
             <div class="header-right">
 
                 <a
-                    href="downloads/ClassClock.apk"
+                    href="download.html"
                     class="download-app-link"
-                    download="ClassClock.apk"
-                    title="Android only. iOS is not yet supported."
+                    title="Download the Class Clock app"
                 >
                     <span class="download-app-label">DOWNLOAD APP</span>
-                    <span class="download-app-note">Android only · iOS not yet supported</span>
                 </a>
 
                 <a href="admin.html" class="nav-link" title="Go to Admin">ADMIN</a>

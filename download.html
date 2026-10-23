@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Class Clock</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css?v=21">
+    <style>
+        .download-page {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            padding-bottom: 28px;
+        }
+
+        .download-back {
+            color: #9ec8ef;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-decoration: none;
+        }
+
+        .download-back:hover { color: #39a9ff; }
+
+        .download-lead h1 {
+            margin: 8px 0 10px;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            letter-spacing: 0.4px;
+        }
+
+        .download-lead p,
+        .build-copy {
+            margin: 0;
+            color: #9aafc3;
+            line-height: 1.55;
+            max-width: 68ch;
+        }
+
+        .build-card {
+            border: 1px solid #2b394a;
+            border-radius: 16px;
+            background: #111a24;
+            padding: 18px 18px 16px;
+        }
+
+        .build-card.latest {
+            border-color: #2f6ea3;
+            background: linear-gradient(180deg, rgba(57, 169, 255, 0.08), #111a24 42%);
+        }
+
+        .build-kicker {
+            color: #39a9ff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+        }
+
+        .build-card h2 {
+            margin: 6px 0 8px;
+            font-size: 1.25rem;
+        }
+
+        .build-meta {
+            margin: 0 0 14px;
+            color: #7d91a6;
+            font-size: 0.82rem;
+        }
+
+        .download-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            min-width: 180px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid #39a9ff;
+            background: #39a9ff;
+            color: #061018;
+            text-decoration: none;
+            line-height: 1.15;
+        }
+
+        .store-btn strong {
+            font-size: 0.92rem;
+        }
+
+        .store-btn span {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .store-btn:hover { filter: brightness(1.08); }
+
+        .store-btn.disabled {
+            border-color: #2b394a;
+            background: #0c141c;
+            color: #7d91a6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .earlier-empty {
+            margin: 0;
+            color: #7d91a6;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container download-page">
+        <a class="download-back" href="index.html">← CLASS CLOCK</a>
+
+        <section class="download-lead">
+            <div class="section-title">CLASS CLOCK APP</div>
+            <h1>Download Class Clock</h1>
+            <p>
+                Class Clock is the phone app for BSIT 2-1. It keeps the weekly schedule,
+                class countdown, and task deadlines on the device. Class and task pop-ups
+                still arrive when the app is closed, including after a restart, as long as
+                notifications and alarms stay allowed. Schedule changes, skipped classes,
+                shifts, and no-class days are checked from the same Class Clock schedule
+                used on this site.
+            </p>
+        </section>
+
+        <section class="build-card latest" aria-label="Newest build">
+            <div class="build-kicker">NEWEST BUILD</div>
+            <h2>Class Clock for Android</h2>
+            <p class="build-meta">Current file · ClassClock.apk · posted October 19, 2026</p>
+            <p class="build-copy">
+                Install this build on Android. If a Class Clock app signed with an older key
+                is already installed, uninstall it before installing a build that was signed again.
+            </p>
+            <div class="download-actions" style="margin-top:14px">
+                <a class="store-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">
+                    <span>ANDROID</span>
+                    <strong>Download</strong>
+                </a>
+                <span class="store-btn disabled" role="button" aria-disabled="true" title="Not yet supported">
+                    <span>IOS · NOT YET SUPPORTED</span>
+                    <strong>Download</strong>
+                </span>
+            </div>
+        </section>
+
+        <section aria-label="Earlier builds">
+            <div class="section-heading">
+                <div>
+                    <div class="section-title">EARLIER BUILDS</div>
+                    <div class="section-subtitle">Older files stay under the newest build</div>
+                </div>
+            </div>
+            <article class="build-card">
+                <p class="earlier-empty">No earlier builds are posted yet. When a newer APK is published, the previous one will be listed here.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        Class Clock Ver 2.9c.3 (An integrated site for BSIT 2-1)
+        <div class="section-title">Ajill Martin 2026</div>
+    </footer>
+</body>
+
+</html>
