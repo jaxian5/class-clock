@@ -9,163 +9,165 @@
     <link rel="stylesheet" href="style.css?v=21">
     <style>
         .download-page {
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-            padding-bottom: 28px;
+            max-width: 640px;
+            margin: 0 auto;
+            padding-bottom: 12px;
         }
 
         .download-back {
-            color: #9ec8ef;
+            color: #7d91a6;
             font-size: 0.72rem;
             font-weight: 800;
-            letter-spacing: 1.4px;
+            letter-spacing: 1.6px;
             text-decoration: none;
         }
 
-        .download-back:hover { color: #39a9ff; }
+        .download-back:hover { color: var(--accent); }
+
+        .download-lead {
+            margin: 28px 0 32px;
+        }
 
         .download-lead h1 {
-            margin: 8px 0 10px;
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            letter-spacing: 0.4px;
+            margin: 10px 0 8px;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            letter-spacing: -0.03em;
         }
 
         .download-lead p,
-        .build-copy,
+        .build-note,
+        .ios-note,
         .faq-item p {
             margin: 0;
             color: #9aafc3;
-            line-height: 1.55;
-            max-width: 68ch;
+            line-height: 1.5;
         }
 
-        .build-card {
-            border: 1px solid #2b394a;
+        .panel {
+            border: 1px solid var(--border);
             border-radius: 16px;
-            background: #111a24;
-            padding: 18px 18px 16px;
+            background: rgba(14, 20, 29, 0.9);
         }
 
-        .build-card.latest {
-            border-color: #2f6ea3;
-            background: linear-gradient(180deg, rgba(57, 169, 255, 0.08), #111a24 42%);
-        }
-
-        .build-kicker {
-            color: #39a9ff;
+        .panel-label {
+            padding: 14px 18px 0;
+            color: #7892ad;
             font-size: 0.68rem;
             font-weight: 800;
-            letter-spacing: 1.6px;
+            letter-spacing: 2.4px;
         }
 
-        .build-heading {
+        .build-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 4px 16px;
+            align-items: center;
+            padding: 16px 18px;
+        }
+
+        .build-row + .build-row,
+        .build-note {
+            border-top: 1px solid var(--border);
+        }
+
+        .build-name {
             display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 6px 0 8px;
+            align-items: baseline;
+            gap: 8px;
+            min-width: 0;
         }
 
-        .build-heading h2 {
-            margin: 0;
-            font-size: 1.25rem;
+        .build-name strong {
+            font-size: 1.05rem;
+            letter-spacing: -0.02em;
         }
 
-        .build-ver {
-            display: inline-flex;
-            align-items: center;
-            padding: 3px 8px;
-            border: 1px solid #2f6ea3;
-            border-radius: 999px;
-            color: #39a9ff;
-            font-size: 0.72rem;
+        .build-tag {
+            color: var(--accent);
+            font-size: 0.68rem;
             font-weight: 800;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.8px;
         }
 
-        .build-meta {
-            margin: 0 0 14px;
+        .build-meta,
+        .ios-note {
             color: #7d91a6;
             font-size: 0.82rem;
         }
 
-        .download-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .build-note {
+            padding: 12px 18px 14px;
+            font-size: 0.82rem;
         }
 
-        .store-btn {
+        .download-btn {
             display: inline-flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2px;
-            min-width: 180px;
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid #39a9ff;
-            background: #39a9ff;
+            align-items: center;
+            justify-content: center;
+            min-width: 112px;
+            padding: 9px 14px;
+            border-radius: 10px;
+            background: var(--accent);
             color: #061018;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
             text-decoration: none;
-            line-height: 1.15;
         }
 
-        .store-btn strong {
-            font-size: 0.92rem;
-        }
+        .download-btn:hover { filter: brightness(1.08); }
 
-        .store-btn span {
-            font-size: 0.68rem;
+        .download-link {
+            color: #d7e6f5;
+            font-size: 0.82rem;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            text-decoration: none;
         }
 
-        .store-btn:hover { filter: brightness(1.08); }
+        .download-link:hover { color: var(--accent); }
 
-        .store-btn.disabled {
-            border-color: #2b394a;
-            background: #0c141c;
-            color: #7d91a6;
-            cursor: not-allowed;
-            pointer-events: none;
+        .ios-note { padding: 0 4px; }
+
+        .faq {
+            margin-top: 28px;
         }
 
-        .faq-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .faq-item { border-top: 1px solid var(--border); }
 
-        .faq-item {
-            border: 1px solid #2b394a;
-            border-radius: 16px;
-            background: #111a24;
-            overflow: hidden;
-        }
+        .faq-item:last-child { border-radius: 0 0 16px 16px; }
 
         .faq-item summary {
             cursor: pointer;
             list-style: none;
-            padding: 16px 18px;
-            font-weight: 700;
-            color: #f2f5f8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 18px;
+            color: var(--text);
+            font-size: 0.92rem;
+            font-weight: 600;
         }
 
         .faq-item summary::-webkit-details-marker { display: none; }
 
         .faq-item summary::after {
             content: "+";
-            float: right;
-            color: #39a9ff;
-            font-weight: 800;
+            flex: none;
+            color: #7d91a6;
+            font-weight: 500;
         }
 
         .faq-item[open] summary::after { content: "–"; }
 
-        .faq-item p { padding: 0 18px 16px; }
+        .faq-item p { padding: 0 18px 14px; }
 
-        .faq-item a { color: #39a9ff; }
+        .faq-item a { color: var(--accent); }
+
+        @media (max-width: 560px) {
+            .build-row { grid-template-columns: 1fr; }
+            .download-btn { justify-self: start; margin-top: 8px; }
+        }
     </style>
 </head>
 
@@ -174,92 +176,57 @@
         <a class="download-back" href="index.html">← CLASS CLOCK</a>
 
         <section class="download-lead">
-            <div class="section-title">CLASS CLOCK APP</div>
-            <h1>Download Class Clock</h1>
-            <p>
-                Class Clock is the phone app for BSIT 2-1. It keeps the weekly schedule,
-                class countdown, and task deadlines on the device. Class and task pop-ups
-                still arrive when the app is closed, including after a restart, as long as
-                notifications and alarms stay allowed. Schedule changes, skipped classes,
-                shifts, and no-class days are checked from the same Class Clock schedule
-                used on this site.
-            </p>
+            <div class="section-title">APP</div>
+            <h1>Download</h1>
+            <p>Android app for the BSIT 2-1 schedule, countdown, and task reminders.</p>
         </section>
 
-        <section class="build-card latest" aria-label="Newest build">
-            <div class="build-kicker">NEWEST BUILD</div>
-            <div class="build-heading">
-                <h2>Class Clock for Android</h2>
-                <span class="build-ver">2.1.2</span>
-            </div>
-            <p class="build-meta">Current file · ClassClock.apk · posted October 24, 2026</p>
-            <p class="build-copy">
-                Install this build on Android. If a Class Clock app signed with an older key
-                is already installed, uninstall it before installing a build that was signed again.
-            </p>
-            <div class="download-actions" style="margin-top:14px">
-                <a class="store-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">
-                    <span>ANDROID · 2.1.2</span>
-                    <strong>Download</strong>
-                </a>
-                <span class="store-btn disabled" role="button" aria-disabled="true" title="Not yet supported">
-                    <span>IOS · NOT YET SUPPORTED</span>
-                    <strong>Download</strong>
-                </span>
-            </div>
-        </section>
-
-        <section aria-label="Earlier builds">
-            <div class="section-heading">
+        <section class="panel" aria-label="Builds">
+            <div class="panel-label">BUILDS</div>
+            <div class="build-row">
                 <div>
-                    <div class="section-title">EARLIER BUILDS</div>
-                    <div class="section-subtitle">Older files stay under the newest build</div>
+                    <div class="build-name">
+                        <strong>2.1.2</strong>
+                        <span class="build-tag">CURRENT</span>
+                    </div>
+                    <div class="build-meta">Android · October 24, 2026</div>
                 </div>
+                <a class="download-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">Download</a>
             </div>
-            <article class="build-card">
-                <div class="build-heading">
-                    <h2>Class Clock for Android</h2>
-                    <span class="build-ver">2.0</span>
+            <p class="build-note">If Android blocks the install, uninstall the copy already on the phone first.</p>
+            <div class="build-row">
+                <div>
+                    <div class="build-name"><strong>2.0</strong></div>
+                    <div class="build-meta">Android · October 19, 2026</div>
                 </div>
-                <p class="build-meta">Earlier file · ClassClock-2.0.apk · posted October 19, 2026</p>
-                <div class="download-actions">
-                    <a class="store-btn" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">
-                        <span>ANDROID · 2.0</span>
-                        <strong>Download</strong>
-                    </a>
-                </div>
-            </article>
+                <a class="download-link" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">Download</a>
+            </div>
         </section>
 
-        <section aria-label="Frequently asked questions">
-            <div class="section-heading">
-                <div>
-                    <div class="section-title">FAQ</div>
-                    <div class="section-subtitle">Install, scanning, iOS, bugs, and Google Play</div>
-                </div>
-            </div>
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary>Is this app safe to install?</summary>
-                    <p>Yes. The Android file on this page is Class Clock, posted here for BSIT 2-1. Download it only from this site. It uses the schedule on this site, plus notifications and alarms for class and task times. It is installed directly, not from the Play Store.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Play Protect says that the app needs to be scanned first.</summary>
-                    <p>That message is normal. Play Protect scans apps that are not installed from the Play Store. Let the scan finish, then continue the install. Class Clock is the APK linked on this page.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Why is the app not available yet for iOS?</summary>
-                    <p>There is no iPhone build yet. The download on this page is Android only, so the iOS button stays marked as not yet supported.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>The app crashes / I found some bugs</summary>
-                    <p>Send a screenshot of it to <a href="mailto:jaxsoniancius05@gmail.com">jaxsoniancius05@gmail.com</a></p>
-                </details>
-                <details class="faq-item">
-                    <summary>When will this app release on Google Play?</summary>
-                    <p>Currently, bringing the app to Google Play Store is being considered heavily. Though, there are still some plans for the app to be developed first, therefore, it'll be released once the framework for the app is fully finished just as I envisioned it to be.</p>
-                </details>
-            </div>
+        <p class="ios-note">iOS is not available yet.</p>
+
+        <section class="panel faq" aria-label="Frequently asked questions">
+            <div class="panel-label">FAQ</div>
+            <details class="faq-item">
+                <summary>Is this app safe to install?</summary>
+                <p>Yes. The Android file on this page is Class Clock, posted here for BSIT 2-1. Download it only from this site. It uses the schedule on this site, plus notifications and alarms for class and task times. It is installed directly, not from the Play Store.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Play Protect says that the app needs to be scanned first.</summary>
+                <p>That message is normal. Play Protect scans apps that are not installed from the Play Store. Let the scan finish, then continue the install. Class Clock is the APK linked on this page.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Why is the app not available yet for iOS?</summary>
+                <p>There is no iPhone build yet. The file on this page is Android only.</p>
+            </details>
+            <details class="faq-item">
+                <summary>The app crashes / I found some bugs</summary>
+                <p>Send a screenshot of it to <a href="mailto:jaxsoniancius05@gmail.com">jaxsoniancius05@gmail.com</a></p>
+            </details>
+            <details class="faq-item">
+                <summary>When will this app release on Google Play?</summary>
+                <p>Currently, bringing the app to Google Play Store is being considered heavily. Though, there are still some plans for the app to be developed first, therefore, it'll be released once the framework for the app is fully finished just as I envisioned it to be.</p>
+            </details>
         </section>
     </main>
 
