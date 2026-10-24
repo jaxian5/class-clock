@@ -32,7 +32,8 @@
         }
 
         .download-lead p,
-        .build-copy {
+        .build-copy,
+        .faq-item p {
             margin: 0;
             color: #9aafc3;
             line-height: 1.55;
@@ -58,9 +59,29 @@
             letter-spacing: 1.6px;
         }
 
-        .build-card h2 {
+        .build-heading {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
             margin: 6px 0 8px;
+        }
+
+        .build-heading h2 {
+            margin: 0;
             font-size: 1.25rem;
+        }
+
+        .build-ver {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border: 1px solid #2f6ea3;
+            border-radius: 999px;
+            color: #39a9ff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
         }
 
         .build-meta {
@@ -110,10 +131,41 @@
             pointer-events: none;
         }
 
-        .earlier-empty {
-            margin: 0;
-            color: #7d91a6;
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
+
+        .faq-item {
+            border: 1px solid #2b394a;
+            border-radius: 16px;
+            background: #111a24;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 16px 18px;
+            font-weight: 700;
+            color: #f2f5f8;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: "+";
+            float: right;
+            color: #39a9ff;
+            font-weight: 800;
+        }
+
+        .faq-item[open] summary::after { content: "–"; }
+
+        .faq-item p { padding: 0 18px 16px; }
+
+        .faq-item a { color: #39a9ff; }
     </style>
 </head>
 
@@ -136,15 +188,18 @@
 
         <section class="build-card latest" aria-label="Newest build">
             <div class="build-kicker">NEWEST BUILD</div>
-            <h2>Class Clock for Android</h2>
-            <p class="build-meta">Current file · ClassClock.apk · posted October 19, 2026</p>
+            <div class="build-heading">
+                <h2>Class Clock for Android</h2>
+                <span class="build-ver">2.1.2</span>
+            </div>
+            <p class="build-meta">Current file · ClassClock.apk · posted October 24, 2026</p>
             <p class="build-copy">
                 Install this build on Android. If a Class Clock app signed with an older key
                 is already installed, uninstall it before installing a build that was signed again.
             </p>
             <div class="download-actions" style="margin-top:14px">
                 <a class="store-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">
-                    <span>ANDROID</span>
+                    <span>ANDROID · 2.1.2</span>
                     <strong>Download</strong>
                 </a>
                 <span class="store-btn disabled" role="button" aria-disabled="true" title="Not yet supported">
@@ -162,8 +217,49 @@
                 </div>
             </div>
             <article class="build-card">
-                <p class="earlier-empty">No earlier builds are posted yet. When a newer APK is published, the previous one will be listed here.</p>
+                <div class="build-heading">
+                    <h2>Class Clock for Android</h2>
+                    <span class="build-ver">2.0</span>
+                </div>
+                <p class="build-meta">Earlier file · ClassClock-2.0.apk · posted October 19, 2026</p>
+                <div class="download-actions">
+                    <a class="store-btn" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">
+                        <span>ANDROID · 2.0</span>
+                        <strong>Download</strong>
+                    </a>
+                </div>
             </article>
+        </section>
+
+        <section aria-label="Frequently asked questions">
+            <div class="section-heading">
+                <div>
+                    <div class="section-title">FAQ</div>
+                    <div class="section-subtitle">Install, scanning, iOS, bugs, and Google Play</div>
+                </div>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Is this app safe to install?</summary>
+                    <p>Yes. The Android file on this page is Class Clock, posted here for BSIT 2-1. Download it only from this site. It uses the schedule on this site, plus notifications and alarms for class and task times. It is installed directly, not from the Play Store.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Play Protect says that the app needs to be scanned first.</summary>
+                    <p>That message is normal. Play Protect scans apps that are not installed from the Play Store. Let the scan finish, then continue the install. Class Clock is the APK linked on this page.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Why is the app not available yet for iOS?</summary>
+                    <p>There is no iPhone build yet. The download on this page is Android only, so the iOS button stays marked as not yet supported.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>The app crashes / I found some bugs</summary>
+                    <p>Send a screenshot of it to <a href="mailto:jaxsoniancius05@gmail.com">jaxsoniancius05@gmail.com</a></p>
+                </details>
+                <details class="faq-item">
+                    <summary>When will this app release on Google Play?</summary>
+                    <p>Currently, bringing the app to Google Play Store is being considered heavily. Though, there are still some plans for the app to be developed first, therefore, it'll be released once the framework for the app is fully finished just as I envisioned it to be.</p>
+                </details>
+            </div>
         </section>
     </main>
 
