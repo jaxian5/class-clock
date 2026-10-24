@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css?v=21">
     <style>
         .download-page {
-            max-width: 780px;
+            max-width: 960px;
             margin: 0 auto;
             padding-bottom: 12px;
         }
@@ -24,22 +24,29 @@
 
         .download-back:hover { color: var(--accent); }
 
+        .download-top {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+            gap: 18px;
+            align-items: start;
+            margin-top: 22px;
+        }
+
         .download-lead {
-            margin: 28px 0 32px;
+            margin: 0 0 14px;
+            padding: 12px 2px 0;
         }
 
         .download-lead h1 {
-            margin: 10px 0 8px;
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            margin: 8px 0 6px;
+            font-size: clamp(1.7rem, 3vw, 2.2rem);
             letter-spacing: -0.03em;
         }
 
         .download-lead p,
         .build-note,
         .ios-note,
-        .faq-item p,
-        .showcase-intro,
-        .showcase-meta p {
+        .faq-item p {
             margin: 0;
             color: #9aafc3;
             line-height: 1.5;
@@ -64,7 +71,7 @@
             grid-template-columns: minmax(0, 1fr) auto;
             gap: 4px 16px;
             align-items: center;
-            padding: 16px 18px;
+            padding: 14px 16px;
         }
 
         .build-row + .build-row,
@@ -98,7 +105,7 @@
         }
 
         .build-note {
-            padding: 12px 18px 14px;
+            padding: 10px 16px 12px;
             font-size: 0.82rem;
         }
 
@@ -128,23 +135,45 @@
 
         .download-link:hover { color: var(--accent); }
 
-        .ios-note { padding: 0 4px; margin-top: 16px; }
+        .ios-note { padding: 0 4px; margin-top: 12px; }
 
-        .showcase {
-            margin-top: 28px;
+        .showcase { margin: 0; }
+
+        .showcase-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            padding-right: 16px;
         }
 
-        .showcase-intro {
-            padding: 8px 18px 0;
-            font-size: 0.82rem;
+        .showcase-now {
+            color: #7d91a6;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
         }
 
-        .showcase-stage {
-            margin: 14px 12px 0;
+        .showcase-kicker {
+            color: var(--accent);
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .showcase-now .showcase-kicker::after {
+            content: "·";
+            margin: 0 6px;
+            color: #45617b;
+            font-weight: 500;
         }
 
         .showcase-photo {
             position: relative;
+            margin: 12px 12px 12px;
         }
 
         .showcase-frame {
@@ -162,8 +191,9 @@
             display: block;
             width: 100%;
             height: auto;
-            aspect-ratio: 1376 / 768;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
+            object-position: center;
         }
 
         .showcase-nav {
@@ -174,98 +204,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 10px;
             background: rgba(8, 12, 18, 0.72);
             color: #e7eef6;
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             line-height: 1;
             cursor: pointer;
         }
 
-        .showcase-nav.prev { left: 10px; }
-        .showcase-nav.next { right: 10px; }
+        .showcase-nav.prev { left: 8px; }
+        .showcase-nav.next { right: 8px; }
 
         .showcase-nav:hover {
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        .showcase-meta {
-            display: flex;
-            justify-content: space-between;
-            gap: 16px;
-            align-items: flex-start;
-            padding: 14px 6px 2px;
-        }
-
-        .showcase-kicker {
-            color: var(--accent);
-            font-size: 0.68rem;
-            font-weight: 800;
-            letter-spacing: 1.6px;
-            text-transform: uppercase;
-        }
-
-        .showcase-meta strong {
-            display: block;
-            margin-top: 4px;
-            font-size: 1.02rem;
-            letter-spacing: -0.02em;
-        }
-
-        .showcase-meta p {
-            margin-top: 4px;
-            font-size: 0.82rem;
-        }
-
-        .showcase-count {
-            flex: none;
-            padding-top: 2px;
-            color: #7d91a6;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .showcase-rail {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 8px;
-            padding: 12px 0 14px;
-        }
-
-        .showcase-thumb {
-            padding: 0;
-            border: 1px solid transparent;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #070b10;
-            cursor: pointer;
-            opacity: 0.55;
-        }
-
-        .showcase-thumb[aria-selected="true"] {
-            border-color: var(--accent);
-            opacity: 1;
-        }
-
-        .showcase-thumb:hover { opacity: 1; }
-
-        .showcase-thumb img {
-            display: block;
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 10;
-            object-fit: cover;
-        }
-
         .showcase-nav:focus-visible,
         .showcase-frame:focus-visible,
-        .showcase-thumb:focus-visible,
         .lightbox-close:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
@@ -292,13 +251,6 @@
             height: auto;
         }
 
-        #lightbox-caption {
-            margin: 0;
-            padding: 10px 14px 12px;
-            color: #9aafc3;
-            font-size: 0.82rem;
-        }
-
         .lightbox-close {
             position: absolute;
             top: 10px;
@@ -316,9 +268,7 @@
 
         .lightbox-close:hover { color: var(--accent); }
 
-        .faq {
-            margin-top: 28px;
-        }
+        .faq { margin-top: 28px; }
 
         .faq-item { border-top: 1px solid var(--border); }
 
@@ -352,10 +302,10 @@
 
         .faq-item a { color: var(--accent); }
 
-        @media (max-width: 560px) {
+        @media (max-width: 800px) {
+            .download-top { grid-template-columns: 1fr; }
             .build-row { grid-template-columns: 1fr; }
             .download-btn { justify-self: start; margin-top: 8px; }
-            .showcase-meta { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -364,44 +314,20 @@
     <main class="container download-page">
         <a class="download-back" href="index.html">← CLASS CLOCK</a>
 
-        <section class="download-lead">
-            <div class="section-title">APP</div>
-            <h1>Download</h1>
-            <p>Android app for the BSIT 2-1 schedule, countdown, and task reminders.</p>
-        </section>
-
-        <section class="panel" aria-label="Builds">
-            <div class="panel-label">BUILDS</div>
-            <div class="build-row">
-                <div>
-                    <div class="build-name">
-                        <strong>2.1.2</strong>
-                        <span class="build-tag">CURRENT</span>
+        <div class="download-top">
+            <section class="panel showcase" aria-label="App photos">
+                <div class="showcase-head">
+                    <div class="panel-label">SHOWCASE</div>
+                    <div class="showcase-now">
+                        <span class="showcase-kicker" id="showcase-kicker">Opening</span>
+                        <span id="showcase-count">01 / 04</span>
                     </div>
-                    <div class="build-meta">Android · October 24, 2026</div>
                 </div>
-                <a class="download-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">Download</a>
-            </div>
-            <p class="build-note">If Android blocks the install, uninstall the copy already on the phone first.</p>
-            <div class="build-row">
-                <div>
-                    <div class="build-name"><strong>2.0</strong></div>
-                    <div class="build-meta">Android · October 19, 2026</div>
-                </div>
-                <a class="download-link" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">Download</a>
-            </div>
-        </section>
-
-        <section class="panel showcase" aria-label="App photos">
-            <div class="panel-label">SHOWCASE</div>
-            <p class="showcase-intro">The Android app on a phone and a tablet. Select a photo, or open it larger.</p>
-
-            <div class="showcase-stage">
                 <div class="showcase-photo">
                     <button class="showcase-nav prev" id="showcase-prev" type="button" aria-label="Previous photo">
                         <span aria-hidden="true">‹</span>
                     </button>
-                    <button class="showcase-frame" id="showcase-frame" type="button" aria-label="View larger: Fetching class and tasks">
+                    <button class="showcase-frame" id="showcase-frame" type="button" aria-label="View larger photo">
                         <img
                             id="showcase-photo"
                             src="showcase/opening.jpg"
@@ -414,34 +340,40 @@
                         <span aria-hidden="true">›</span>
                     </button>
                 </div>
+            </section>
 
-                <div class="showcase-meta">
-                    <div>
-                        <div class="showcase-kicker" id="showcase-kicker">Opening</div>
-                        <strong id="showcase-title">Fetching class and tasks</strong>
-                        <p id="showcase-text">Class Clock opens on this splash while it loads the schedule and task list.</p>
+            <div class="download-zone">
+                <section class="download-lead">
+                    <div class="section-title">APP</div>
+                    <h1>Download</h1>
+                    <p>Android app for the BSIT 2-1 schedule, countdown, and task reminders.</p>
+                </section>
+
+                <section class="panel" aria-label="Builds">
+                    <div class="panel-label">BUILDS</div>
+                    <div class="build-row">
+                        <div>
+                            <div class="build-name">
+                                <strong>2.1.2</strong>
+                                <span class="build-tag">CURRENT</span>
+                            </div>
+                            <div class="build-meta">Android · October 24, 2026</div>
+                        </div>
+                        <a class="download-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">Download</a>
                     </div>
-                    <div class="showcase-count" id="showcase-count">01 / 04</div>
-                </div>
+                    <p class="build-note">If Android blocks the install, uninstall the copy already on the phone first.</p>
+                    <div class="build-row">
+                        <div>
+                            <div class="build-name"><strong>2.0</strong></div>
+                            <div class="build-meta">Android · October 19, 2026</div>
+                        </div>
+                        <a class="download-link" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">Download</a>
+                    </div>
+                </section>
 
-                <div class="showcase-rail" role="tablist" aria-label="App photos">
-                    <button class="showcase-thumb" type="button" role="tab" aria-selected="true" aria-label="Fetching class and tasks">
-                        <img src="showcase/opening.jpg" alt="" width="1376" height="768">
-                    </button>
-                    <button class="showcase-thumb" type="button" role="tab" aria-selected="false" tabindex="-1" aria-label="Come back Monday">
-                        <img src="showcase/clock.jpg" alt="" width="1376" height="768">
-                    </button>
-                    <button class="showcase-thumb" type="button" role="tab" aria-selected="false" tabindex="-1" aria-label="Weekly schedule">
-                        <img src="showcase/schedule.jpg" alt="" width="1376" height="768">
-                    </button>
-                    <button class="showcase-thumb" type="button" role="tab" aria-selected="false" tabindex="-1" aria-label="Reminder settings">
-                        <img src="showcase/alerts.jpg" alt="" width="1376" height="768">
-                    </button>
-                </div>
+                <p class="ios-note">iOS is not available yet.</p>
             </div>
-        </section>
-
-        <p class="ios-note">iOS is not available yet.</p>
+        </div>
 
         <section class="panel faq" aria-label="Frequently asked questions">
             <div class="panel-label">FAQ</div>
@@ -471,7 +403,6 @@
     <dialog id="showcase-lightbox" aria-label="Larger photo">
         <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
         <img id="lightbox-photo" alt="">
-        <p id="lightbox-caption"></p>
     </dialog>
 
     <footer class="site-footer">
@@ -485,29 +416,21 @@
                 {
                     src: "showcase/opening.jpg",
                     kicker: "Opening",
-                    title: "Fetching class and tasks",
-                    text: "Class Clock opens on this splash while it loads the schedule and task list.",
                     alt: "Class Clock splash screen on a phone, loading class and task data."
                 },
                 {
                     src: "showcase/clock.jpg",
                     kicker: "Clock",
-                    title: "Come back Monday",
-                    text: "The live view when the day is clear, with the next class and its reminder already shown.",
                     alt: "Class Clock on a tablet in a classroom, showing no more classes today and Monday’s next class."
                 },
                 {
                     src: "showcase/schedule.jpg",
                     kicker: "Schedule",
-                    title: "Weekly schedule",
-                    text: "Subjects grouped under each day, with a search across the week.",
                     alt: "Class Clock weekly schedule on a phone, grouped by weekday."
                 },
                 {
                     src: "showcase/alerts.jpg",
                     kicker: "Alerts",
-                    title: "Reminder settings",
-                    text: "When class and task reminders start, how often they repeat, and the start and end toggles.",
                     alt: "Class Clock alert settings on a phone, with class and task reminder controls."
                 }
             ];
@@ -515,13 +438,9 @@
             var photo = document.getElementById("showcase-photo");
             var frame = document.getElementById("showcase-frame");
             var kicker = document.getElementById("showcase-kicker");
-            var title = document.getElementById("showcase-title");
-            var text = document.getElementById("showcase-text");
             var count = document.getElementById("showcase-count");
-            var thumbs = Array.prototype.slice.call(document.querySelectorAll(".showcase-thumb"));
             var dialog = document.getElementById("showcase-lightbox");
             var lightboxPhoto = document.getElementById("lightbox-photo");
-            var lightboxCaption = document.getElementById("lightbox-caption");
             var stage = document.querySelector(".showcase-photo");
             var index = 0;
             var touchX = 0;
@@ -535,20 +454,12 @@
                 var shot = shots[index];
                 photo.src = shot.src;
                 photo.alt = shot.alt;
-                frame.setAttribute("aria-label", "View larger: " + shot.title);
+                frame.setAttribute("aria-label", "View larger photo, " + shot.kicker);
                 kicker.textContent = shot.kicker;
-                title.textContent = shot.title;
-                text.textContent = shot.text;
                 count.textContent = pad(index + 1) + " / " + pad(shots.length);
-                thumbs.forEach(function (thumb, i) {
-                    var on = i === index;
-                    thumb.setAttribute("aria-selected", on ? "true" : "false");
-                    thumb.tabIndex = on ? 0 : -1;
-                });
                 if (dialog.open) {
                     lightboxPhoto.src = shot.src;
                     lightboxPhoto.alt = shot.alt;
-                    lightboxCaption.textContent = shot.title;
                 }
             }
 
@@ -558,16 +469,10 @@
             document.getElementById("showcase-next").addEventListener("click", function () {
                 show(index + 1);
             });
-            thumbs.forEach(function (thumb, i) {
-                thumb.addEventListener("click", function () {
-                    show(i);
-                });
-            });
             frame.addEventListener("click", function () {
                 var shot = shots[index];
                 lightboxPhoto.src = shot.src;
                 lightboxPhoto.alt = shot.alt;
-                lightboxCaption.textContent = shot.title;
                 dialog.showModal();
             });
             document.getElementById("lightbox-close").addEventListener("click", function () {
