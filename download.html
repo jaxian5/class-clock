@@ -26,15 +26,23 @@
 
         .download-top {
             display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-            gap: 18px;
-            align-items: start;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            column-gap: 22px;
             margin-top: 22px;
         }
 
         .download-lead {
+            grid-column: 1;
             margin: 0 0 14px;
-            padding: 12px 2px 0;
+            padding: 2px 2px 0;
+        }
+
+        .download-pair {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            column-gap: 22px;
+            align-items: start;
         }
 
         .download-lead h1 {
@@ -303,7 +311,8 @@
         .faq-item a { color: var(--accent); }
 
         @media (max-width: 800px) {
-            .download-top { grid-template-columns: 1fr; }
+            .download-top,
+            .download-pair { grid-template-columns: 1fr; }
             .build-row { grid-template-columns: 1fr; }
             .download-btn { justify-self: start; margin-top: 8px; }
         }
@@ -315,63 +324,65 @@
         <a class="download-back" href="index.html">← CLASS CLOCK</a>
 
         <div class="download-top">
-            <section class="panel showcase" aria-label="App photos">
-                <div class="showcase-head">
-                    <div class="panel-label">SHOWCASE</div>
-                    <div class="showcase-now">
-                        <span class="showcase-kicker" id="showcase-kicker">Opening</span>
-                        <span id="showcase-count">01 / 04</span>
-                    </div>
-                </div>
-                <div class="showcase-photo">
-                    <button class="showcase-nav prev" id="showcase-prev" type="button" aria-label="Previous photo">
-                        <span aria-hidden="true">‹</span>
-                    </button>
-                    <button class="showcase-frame" id="showcase-frame" type="button" aria-label="View larger photo">
-                        <img
-                            id="showcase-photo"
-                            src="showcase/opening.jpg"
-                            width="1376"
-                            height="768"
-                            alt="Class Clock splash screen on a phone, loading class and task data."
-                        >
-                    </button>
-                    <button class="showcase-nav next" id="showcase-next" type="button" aria-label="Next photo">
-                        <span aria-hidden="true">›</span>
-                    </button>
-                </div>
+            <section class="download-lead">
+                <div class="section-title">APP</div>
+                <h1>Download</h1>
+                <p>Android app for the BSIT 2-1 schedule, countdown, and task reminders.</p>
             </section>
 
-            <div class="download-zone">
-                <section class="download-lead">
-                    <div class="section-title">APP</div>
-                    <h1>Download</h1>
-                    <p>Android app for the BSIT 2-1 schedule, countdown, and task reminders.</p>
-                </section>
-
-                <section class="panel" aria-label="Builds">
-                    <div class="panel-label">BUILDS</div>
-                    <div class="build-row">
-                        <div>
-                            <div class="build-name">
-                                <strong>2.1.2</strong>
-                                <span class="build-tag">CURRENT</span>
+            <div class="download-pair">
+                <div class="download-stack">
+                    <section class="panel" aria-label="Builds">
+                        <div class="panel-label">BUILDS</div>
+                        <div class="build-row">
+                            <div>
+                                <div class="build-name">
+                                    <strong>2.1.2</strong>
+                                    <span class="build-tag">CURRENT</span>
+                                </div>
+                                <div class="build-meta">Android · October 24, 2026</div>
                             </div>
-                            <div class="build-meta">Android · October 24, 2026</div>
+                            <a class="download-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">Download</a>
                         </div>
-                        <a class="download-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">Download</a>
+                        <p class="build-note">If Android blocks the install, uninstall the copy already on the phone first.</p>
+                        <div class="build-row">
+                            <div>
+                                <div class="build-name"><strong>2.0</strong></div>
+                                <div class="build-meta">Android · October 19, 2026</div>
+                            </div>
+                            <a class="download-link" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">Download</a>
+                        </div>
+                    </section>
+
+                    <p class="ios-note">iOS is not available yet.</p>
+                </div>
+
+                <section class="panel showcase" aria-label="App photos" aria-roledescription="carousel">
+                    <div class="showcase-head">
+                        <div class="panel-label">SHOWCASE</div>
+                        <div class="showcase-now">
+                            <span class="showcase-kicker" id="showcase-kicker">Opening</span>
+                            <span id="showcase-count">01 / 04</span>
+                        </div>
                     </div>
-                    <p class="build-note">If Android blocks the install, uninstall the copy already on the phone first.</p>
-                    <div class="build-row">
-                        <div>
-                            <div class="build-name"><strong>2.0</strong></div>
-                            <div class="build-meta">Android · October 19, 2026</div>
-                        </div>
-                        <a class="download-link" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">Download</a>
+                    <div class="showcase-photo">
+                        <button class="showcase-nav prev" id="showcase-prev" type="button" aria-label="Previous photo">
+                            <span aria-hidden="true">‹</span>
+                        </button>
+                        <button class="showcase-frame" id="showcase-frame" type="button" aria-label="View larger photo, Opening">
+                            <img
+                                id="showcase-photo"
+                                src="showcase/opening.jpg"
+                                width="1376"
+                                height="768"
+                                alt="Class Clock splash screen on a phone, loading class and task data."
+                            >
+                        </button>
+                        <button class="showcase-nav next" id="showcase-next" type="button" aria-label="Next photo">
+                            <span aria-hidden="true">›</span>
+                        </button>
                     </div>
                 </section>
-
-                <p class="ios-note">iOS is not available yet.</p>
             </div>
         </div>
 
@@ -441,9 +452,13 @@
             var count = document.getElementById("showcase-count");
             var dialog = document.getElementById("showcase-lightbox");
             var lightboxPhoto = document.getElementById("lightbox-photo");
-            var stage = document.querySelector(".showcase-photo");
+            var stage = document.querySelector(".showcase");
             var index = 0;
             var touchX = 0;
+            var timer = 0;
+            var paused = false;
+            var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var AUTO_MS = 4200;
 
             function pad(n) {
                 return (n < 10 ? "0" : "") + n;
@@ -463,16 +478,28 @@
                 }
             }
 
+            function queue() {
+                window.clearTimeout(timer);
+                if (reduced || paused || dialog.open || document.hidden) return;
+                timer = window.setTimeout(function () {
+                    show(index + 1);
+                    queue();
+                }, AUTO_MS);
+            }
+
             document.getElementById("showcase-prev").addEventListener("click", function () {
                 show(index - 1);
+                queue();
             });
             document.getElementById("showcase-next").addEventListener("click", function () {
                 show(index + 1);
+                queue();
             });
             frame.addEventListener("click", function () {
                 var shot = shots[index];
                 lightboxPhoto.src = shot.src;
                 lightboxPhoto.alt = shot.alt;
+                window.clearTimeout(timer);
                 dialog.showModal();
             });
             document.getElementById("lightbox-close").addEventListener("click", function () {
@@ -481,16 +508,40 @@
             dialog.addEventListener("click", function (event) {
                 if (event.target === dialog) dialog.close();
             });
+            dialog.addEventListener("close", queue);
             stage.addEventListener("keydown", function (event) {
                 if (dialog.open) return;
                 if (event.key === "ArrowRight") {
                     event.preventDefault();
                     show(index + 1);
+                    queue();
                 }
                 if (event.key === "ArrowLeft") {
                     event.preventDefault();
                     show(index - 1);
+                    queue();
                 }
+            });
+            stage.addEventListener("mouseenter", function () {
+                paused = true;
+                window.clearTimeout(timer);
+            });
+            stage.addEventListener("mouseleave", function () {
+                paused = false;
+                queue();
+            });
+            stage.addEventListener("focusin", function () {
+                paused = true;
+                window.clearTimeout(timer);
+            });
+            stage.addEventListener("focusout", function (event) {
+                if (stage.contains(event.relatedTarget)) return;
+                paused = false;
+                queue();
+            });
+            document.addEventListener("visibilitychange", function () {
+                if (document.hidden) window.clearTimeout(timer);
+                else queue();
             });
             stage.addEventListener("touchstart", function (event) {
                 touchX = event.changedTouches[0].clientX;
@@ -499,7 +550,10 @@
                 var dx = event.changedTouches[0].clientX - touchX;
                 if (Math.abs(dx) < 48) return;
                 show(index + (dx < 0 ? 1 : -1));
+                queue();
             }, { passive: true });
+
+            queue();
         })();
     </script>
 </body>
