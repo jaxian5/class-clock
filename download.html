@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css?v=21">
     <style>
         .download-page {
-            max-width: 640px;
+            max-width: 780px;
             margin: 0 auto;
             padding-bottom: 12px;
         }
@@ -37,7 +37,9 @@
         .download-lead p,
         .build-note,
         .ios-note,
-        .faq-item p {
+        .faq-item p,
+        .showcase-intro,
+        .showcase-meta p {
             margin: 0;
             color: #9aafc3;
             line-height: 1.5;
@@ -126,7 +128,193 @@
 
         .download-link:hover { color: var(--accent); }
 
-        .ios-note { padding: 0 4px; }
+        .ios-note { padding: 0 4px; margin-top: 16px; }
+
+        .showcase {
+            margin-top: 28px;
+        }
+
+        .showcase-intro {
+            padding: 8px 18px 0;
+            font-size: 0.82rem;
+        }
+
+        .showcase-stage {
+            margin: 14px 12px 0;
+        }
+
+        .showcase-photo {
+            position: relative;
+        }
+
+        .showcase-frame {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #070b10;
+            cursor: zoom-in;
+        }
+
+        .showcase-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1376 / 768;
+            object-fit: cover;
+        }
+
+        .showcase-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 10px;
+            background: rgba(8, 12, 18, 0.72);
+            color: #e7eef6;
+            font-size: 1.35rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .showcase-nav.prev { left: 10px; }
+        .showcase-nav.next { right: 10px; }
+
+        .showcase-nav:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .showcase-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 14px 6px 2px;
+        }
+
+        .showcase-kicker {
+            color: var(--accent);
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+        }
+
+        .showcase-meta strong {
+            display: block;
+            margin-top: 4px;
+            font-size: 1.02rem;
+            letter-spacing: -0.02em;
+        }
+
+        .showcase-meta p {
+            margin-top: 4px;
+            font-size: 0.82rem;
+        }
+
+        .showcase-count {
+            flex: none;
+            padding-top: 2px;
+            color: #7d91a6;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .showcase-rail {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+            padding: 12px 0 14px;
+        }
+
+        .showcase-thumb {
+            padding: 0;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #070b10;
+            cursor: pointer;
+            opacity: 0.55;
+        }
+
+        .showcase-thumb[aria-selected="true"] {
+            border-color: var(--accent);
+            opacity: 1;
+        }
+
+        .showcase-thumb:hover { opacity: 1; }
+
+        .showcase-thumb img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+
+        .showcase-nav:focus-visible,
+        .showcase-frame:focus-visible,
+        .showcase-thumb:focus-visible,
+        .lightbox-close:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        #showcase-lightbox {
+            position: relative;
+            width: min(1040px, calc(100vw - 28px));
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: #070b10;
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        #showcase-lightbox::backdrop {
+            background: rgba(5, 8, 12, 0.84);
+        }
+
+        #showcase-lightbox img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        #lightbox-caption {
+            margin: 0;
+            padding: 10px 14px 12px;
+            color: #9aafc3;
+            font-size: 0.82rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 10px;
+            background: rgba(8, 12, 18, 0.78);
+            color: #e7eef6;
+            font: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 7px 10px;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover { color: var(--accent); }
 
         .faq {
             margin-top: 28px;
@@ -167,6 +355,7 @@
         @media (max-width: 560px) {
             .build-row { grid-template-columns: 1fr; }
             .download-btn { justify-self: start; margin-top: 8px; }
+            .showcase-meta { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -203,6 +392,55 @@
             </div>
         </section>
 
+        <section class="panel showcase" aria-label="App photos">
+            <div class="panel-label">SHOWCASE</div>
+            <p class="showcase-intro">The Android app on a phone and a tablet. Select a photo, or open it larger.</p>
+
+            <div class="showcase-stage">
+                <div class="showcase-photo">
+                    <button class="showcase-nav prev" id="showcase-prev" type="button" aria-label="Previous photo">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <button class="showcase-frame" id="showcase-frame" type="button" aria-label="View larger: Fetching class and tasks">
+                        <img
+                            id="showcase-photo"
+                            src="showcase/opening.jpg"
+                            width="1376"
+                            height="768"
+                            alt="Class Clock splash screen on a phone, loading class and task data."
+                        >
+                    </button>
+                    <button class="showcase-nav next" id="showcase-next" type="button" aria-label="Next photo">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+
+                <div class="showcase-meta">
+                    <div>
+                        <div class="showcase-kicker" id="showcase-kicker">Opening</div>
+                        <strong id="showcase-title">Fetching class and tasks</strong>
+                        <p id="showcase-text">Class Clock opens on this splash while it loads the schedule and task list.</p>
+                    </div>
+                    <div class="showcase-count" id="showcase-count">01 / 04</div>
+                </div>
+
+                <div class="showcase-rail" role="tablist" aria-label="App photos">
+                    <button class="showcase-thumb" type="button" role="tab" aria-selected="true" aria-label="Fetching class and tasks">
+                        <img src="showcase/opening.jpg" alt="" width="1376" height="768">
+                    </button>
+                    <button class="showcase-thumb" type="button" role="tab" aria-selected="false" tabindex="-1" aria-label="Come back Monday">
+                        <img src="showcase/clock.jpg" alt="" width="1376" height="768">
+                    </button>
+                    <button class="showcase-thumb" type="button" role="tab" aria-selected="false" tabindex="-1" aria-label="Weekly schedule">
+                        <img src="showcase/schedule.jpg" alt="" width="1376" height="768">
+                    </button>
+                    <button class="showcase-thumb" type="button" role="tab" aria-selected="false" tabindex="-1" aria-label="Reminder settings">
+                        <img src="showcase/alerts.jpg" alt="" width="1376" height="768">
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <p class="ios-note">iOS is not available yet.</p>
 
         <section class="panel faq" aria-label="Frequently asked questions">
@@ -230,10 +468,135 @@
         </section>
     </main>
 
+    <dialog id="showcase-lightbox" aria-label="Larger photo">
+        <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
+        <img id="lightbox-photo" alt="">
+        <p id="lightbox-caption"></p>
+    </dialog>
+
     <footer class="site-footer">
         Class Clock Ver 2.9c.3 (An integrated site for BSIT 2-1)
         <div class="section-title">Ajill Martin 2026</div>
     </footer>
+
+    <script>
+        (function () {
+            var shots = [
+                {
+                    src: "showcase/opening.jpg",
+                    kicker: "Opening",
+                    title: "Fetching class and tasks",
+                    text: "Class Clock opens on this splash while it loads the schedule and task list.",
+                    alt: "Class Clock splash screen on a phone, loading class and task data."
+                },
+                {
+                    src: "showcase/clock.jpg",
+                    kicker: "Clock",
+                    title: "Come back Monday",
+                    text: "The live view when the day is clear, with the next class and its reminder already shown.",
+                    alt: "Class Clock on a tablet in a classroom, showing no more classes today and Monday’s next class."
+                },
+                {
+                    src: "showcase/schedule.jpg",
+                    kicker: "Schedule",
+                    title: "Weekly schedule",
+                    text: "Subjects grouped under each day, with a search across the week.",
+                    alt: "Class Clock weekly schedule on a phone, grouped by weekday."
+                },
+                {
+                    src: "showcase/alerts.jpg",
+                    kicker: "Alerts",
+                    title: "Reminder settings",
+                    text: "When class and task reminders start, how often they repeat, and the start and end toggles.",
+                    alt: "Class Clock alert settings on a phone, with class and task reminder controls."
+                }
+            ];
+
+            var photo = document.getElementById("showcase-photo");
+            var frame = document.getElementById("showcase-frame");
+            var kicker = document.getElementById("showcase-kicker");
+            var title = document.getElementById("showcase-title");
+            var text = document.getElementById("showcase-text");
+            var count = document.getElementById("showcase-count");
+            var thumbs = Array.prototype.slice.call(document.querySelectorAll(".showcase-thumb"));
+            var dialog = document.getElementById("showcase-lightbox");
+            var lightboxPhoto = document.getElementById("lightbox-photo");
+            var lightboxCaption = document.getElementById("lightbox-caption");
+            var stage = document.querySelector(".showcase-photo");
+            var index = 0;
+            var touchX = 0;
+
+            function pad(n) {
+                return (n < 10 ? "0" : "") + n;
+            }
+
+            function show(next) {
+                index = (next + shots.length) % shots.length;
+                var shot = shots[index];
+                photo.src = shot.src;
+                photo.alt = shot.alt;
+                frame.setAttribute("aria-label", "View larger: " + shot.title);
+                kicker.textContent = shot.kicker;
+                title.textContent = shot.title;
+                text.textContent = shot.text;
+                count.textContent = pad(index + 1) + " / " + pad(shots.length);
+                thumbs.forEach(function (thumb, i) {
+                    var on = i === index;
+                    thumb.setAttribute("aria-selected", on ? "true" : "false");
+                    thumb.tabIndex = on ? 0 : -1;
+                });
+                if (dialog.open) {
+                    lightboxPhoto.src = shot.src;
+                    lightboxPhoto.alt = shot.alt;
+                    lightboxCaption.textContent = shot.title;
+                }
+            }
+
+            document.getElementById("showcase-prev").addEventListener("click", function () {
+                show(index - 1);
+            });
+            document.getElementById("showcase-next").addEventListener("click", function () {
+                show(index + 1);
+            });
+            thumbs.forEach(function (thumb, i) {
+                thumb.addEventListener("click", function () {
+                    show(i);
+                });
+            });
+            frame.addEventListener("click", function () {
+                var shot = shots[index];
+                lightboxPhoto.src = shot.src;
+                lightboxPhoto.alt = shot.alt;
+                lightboxCaption.textContent = shot.title;
+                dialog.showModal();
+            });
+            document.getElementById("lightbox-close").addEventListener("click", function () {
+                dialog.close();
+            });
+            dialog.addEventListener("click", function (event) {
+                if (event.target === dialog) dialog.close();
+            });
+            stage.addEventListener("keydown", function (event) {
+                if (dialog.open) return;
+                if (event.key === "ArrowRight") {
+                    event.preventDefault();
+                    show(index + 1);
+                }
+                if (event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    show(index - 1);
+                }
+            });
+            stage.addEventListener("touchstart", function (event) {
+                touchX = event.changedTouches[0].clientX;
+            }, { passive: true });
+            stage.addEventListener("touchend", function (event) {
+                var dx = event.changedTouches[0].clientX - touchX;
+                if (Math.abs(dx) < 48) return;
+                show(index + (dx < 0 ? 1 : -1));
+            }, { passive: true });
+        })();
+    </script>
 </body>
 
 </html>
