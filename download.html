@@ -320,6 +320,22 @@
         .download-legacy-name{display:block;margin-top:8px;font-size:clamp(.9rem,2vw,1.12rem);font-weight:650;letter-spacing:.01em;color:#90afca}
         .app-rename-note{padding:13px 16px;border-left:3px solid #39a9ff;background:rgba(57,169,255,.065);border-radius:8px;font-size:.84rem;line-height:1.65}
         .app-rename-note strong{color:#d7e6f5}
+        .earlier-builds-trigger{border-top:1px solid var(--border);padding:13px 16px 15px}
+        .earlier-downloads-button{appearance:none;border:0;padding:3px 0;background:transparent;cursor:pointer;
+            font:inherit;font-weight:700;font-size:.8rem;text-align:left}
+        .earlier-downloads-button:focus-visible,.earlier-downloads-close:focus-visible{
+            outline:2px solid var(--accent);outline-offset:4px}
+        .earlier-downloads-dialog{width:min(490px,calc(100vw - 28px));padding:0;border:1px solid var(--border);
+            border-radius:16px;background:#0e141d;color:var(--text);box-shadow:0 28px 90px rgba(0,0,0,.6)}
+        .earlier-downloads-dialog::backdrop{background:rgba(5,8,12,.8)}
+        .earlier-downloads-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:15px 20px}
+        .earlier-downloads-header .panel-label{padding:0}
+        .earlier-downloads-header h2{margin:8px 0;font-size:1.2rem;letter-spacing:-.035em}
+        .earlier-downloads-header p{margin:0;color:#9aafc3;font-size:.79rem;line-height:1.5}
+        .earlier-downloads-close{border:1px solid var(--border);background:#111a24;color:#d7e6f5;
+            padding:8px 11px;border-radius:8px;font:inherit;cursor:pointer}
+        .earlier-downloads-dialog .build-row{border-top:1px solid var(--border);padding:19px 20px}
+        @media(max-width:800px){.earlier-downloads-dialog .build-row{grid-template-columns:minmax(0,1fr) auto}}
     </style>
 </head>
 
@@ -332,30 +348,33 @@
                 <div class="section-title">APP</div>
                 <h1>Project Istaroth <span class="download-legacy-name">(fka Class Clock)</span></h1>
                 <p>Android app for the BSIT 2-1 schedule, countdown, and task reminders.</p>
-                <p class="app-rename-note"><strong>Formerly Class Clock.</strong> Existing downloadable APKs were built under that name and may still display the original app branding. The website is now Project Istaroth (fka Class Clock).</p>
+                <p class="app-rename-note"><strong>Formerly Class Clock.</strong> Earlier APKs were built under that name and may still display the original app branding. Version 2.1.3 uses the Project Istaroth name. The website is now Project Istaroth (fka Class Clock).</p>
             </section>
 
             <div class="download-pair">
                 <div class="download-stack">
-                    <section class="panel" aria-label="Builds">
+                    <section class="panel" aria-label="Android builds">
                         <div class="panel-label">BUILDS</div>
                         <div class="build-row">
                             <div>
                                 <div class="build-name">
-                                    <strong>2.1.2</strong>
+                                    <strong>2.1.3</strong>
                                     <span class="build-tag">CURRENT</span>
                                 </div>
-                                <div class="build-meta">Android · October 24, 2026</div>
+                                <div class="build-meta">Project Istaroth · Android · October 26, 2026</div>
                             </div>
-                            <a class="download-btn" href="downloads/ClassClock.apk" download="ClassClock.apk">Download</a>
+                            <a class="download-btn" href="downloads/Project-Istaroth.apk" download="Project-Istaroth.apk" aria-label="Download Project Istaroth version 2.1.3">Download</a>
                         </div>
-                        <p class="build-note">If Android blocks the install, uninstall the copy already on the phone first.</p>
+                        <p class="build-note">Version 2.1.3 uses a different signing certificate. Android cannot install it over 2.1.2: back up any needed app data, uninstall the old app, then install this version.</p>
                         <div class="build-row">
                             <div>
-                                <div class="build-name"><strong>2.0</strong></div>
-                                <div class="build-meta">Android · October 19, 2026</div>
+                                <div class="build-name"><strong>2.1.2</strong></div>
+                                <div class="build-meta">Class Clock · Android · October 24, 2026</div>
                             </div>
-                            <a class="download-link" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk">Download</a>
+                            <a class="download-link" href="downloads/ClassClock.apk" download="ClassClock.apk" aria-label="Download earlier Class Clock version 2.1.2">Download</a>
+                        </div>
+                        <div class="earlier-builds-trigger">
+                            <button class="download-link earlier-downloads-button" id="earlier-downloads-button" type="button" aria-haspopup="dialog" aria-controls="earlier-downloads-dialog">Earlier Downloads <span aria-hidden="true">↗</span></button>
                         </div>
                     </section>
 
@@ -416,6 +435,24 @@
         </section>
     </main>
 
+    <dialog id="earlier-downloads-dialog" class="earlier-downloads-dialog" aria-labelledby="earlier-downloads-title">
+        <div class="earlier-downloads-header">
+            <div>
+                <div class="panel-label">ARCHIVED BUILDS</div>
+                <h2 id="earlier-downloads-title">Earlier Downloads</h2>
+                <p>Previous Android releases of Class Clock, now Project Istaroth.</p>
+            </div>
+            <button id="earlier-downloads-close" class="earlier-downloads-close" type="button" aria-label="Close Earlier Downloads">✕</button>
+        </div>
+        <div class="build-row">
+            <div>
+                <div class="build-name"><strong>2.0</strong></div>
+                <div class="build-meta">Class Clock · Android · October 19, 2026</div>
+            </div>
+            <a class="download-link" href="downloads/ClassClock-2.0.apk" download="ClassClock-2.0.apk" aria-label="Download archived Class Clock version 2.0">Download</a>
+        </div>
+    </dialog>
+
     <dialog id="showcase-lightbox" aria-label="Larger photo">
         <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
         <img id="lightbox-photo" alt="">
@@ -425,6 +462,20 @@
         Project Istaroth (fka Class Clock) · Ver 2.9c.3 · An integrated site for BSIT 2-1
         <div class="section-title">Ajill Martin 2026</div>
     </footer>
+
+    <script>
+        (function () {
+            var trigger = document.getElementById("earlier-downloads-button");
+            var dialog = document.getElementById("earlier-downloads-dialog");
+            var close = document.getElementById("earlier-downloads-close");
+            trigger.addEventListener("click", function () { dialog.showModal(); });
+            close.addEventListener("click", function () { dialog.close(); trigger.focus(); });
+            dialog.addEventListener("click", function (event) {
+                if (event.target === dialog) { dialog.close(); trigger.focus(); }
+            });
+            dialog.addEventListener("close", function () { trigger.focus(); });
+        })();
+    </script>
 
     <script>
         (function () {

@@ -1,0 +1,115 @@
+name: Rebuild Project Istaroth Android 2.1.3
+on:
+  push:
+    branches: ["release/project-istaroth-android-2.1.3"]
+    paths:
+      - ".github/workflows/rebuild-android-2.1.3.yml"
+      - "scripts/rebrand_apk.py"
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  rebrand-and-sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Decode original signed Class Clock 2.1.2 and rebuild as Istaroth 2.1.3
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --silent --show-error -o /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar
+          echo "56d59c524fc764263ba8d345754d8daf55b1887818b15cd3b594f555d249e2db  /tmp/apktool.jar" | sha256sum -c
+          java -jar /tmp/apktool.jar d -f downloads/ClassClock.apk -o /tmp/istaroth-decompiled
+          python3 scripts/rebrand_apk.py /tmp/istaroth-decompiled
+          java -jar /tmp/apktool.jar b /tmp/istaroth-decompiled -o /tmp/Project-Istaroth-unsigned.apk
+      - name: Align, sign and verify APK
+        env:
+          ISTAROTH_KEYSTORE_BASE64: ${{ secrets.ISTAROTH_KEYSTORE_BASE64 }}
+          ISTAROTH_KEYSTORE_PASSWORD: ${{ secrets.ISTAROTH_KEYSTORE_PASSWORD }}
+          ISTAROTH_KEY_ALIAS: ${{ secrets.ISTAROTH_KEY_ALIAS }}
+          ISTAROTH_KEY_PASSWORD: ${{ secrets.ISTAROTH_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          BT="$(find "$SDK/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
+          ZIPALIGN="$BT/zipalign"
+          APKSIGNER="$BT/apksigner"
+          AAPT="$BT/aapt"
+          "$ZIPALIGN" -p -f 4 /tmp/Project-Istaroth-unsigned.apk /tmp/Project-Istaroth-aligned.apk
+
+          if [[ -n "${ISTAROTH_KEYSTORE_BASE64:-}" ]]; then
+            : "${ISTAROTH_KEYSTORE_PASSWORD:?Incomplete release signing configuration}"
+            : "${ISTAROTH_KEY_ALIAS:?Incomplete release signing configuration}"
+            : "${ISTAROTH_KEY_PASSWORD:?Incomplete release signing configuration}"
+            printf '%s' "$ISTAROTH_KEYSTORE_BASE64" | base64 -d > /tmp/istaroth-release.jks
+            STOREPASS="$ISTAROTH_KEYSTORE_PASSWORD"
+            KEYPASS="$ISTAROTH_KEY_PASSWORD"
+            ALIAS="$ISTAROTH_KEY_ALIAS"
+            echo "Using configured release keystore (do not expose or commit this key)."
+          else
+            # Original APK contains only the PUBLIC signing certificate. If no
+            # matching private keystore secret exists, Android requires the
+            # old app to be uninstalled before installing this signed build.
+            # Ephemeral signer is for this candidate only. Future releases
+            # require the owner's privately held stable keystore.
+            STOREPASS="$(openssl rand -hex 20)"
+            KEYPASS="$STOREPASS"
+            ALIAS="istaroth"
+            keytool -genkeypair -keystore /tmp/istaroth-release.jks -storepass "$STOREPASS" -keypass "$KEYPASS" \
+              -alias "$ALIAS" -keyalg RSA -keysize 3072 -validity 3650 -dname "CN=Project Istaroth, OU=Android"
+            echo "::warning::No release keystore secret found: signing with a new key. Existing 2.1.2 users MUST UNINSTALL before installing 2.1.3; a future upgrade will require a persistent signing key."
+          fi
+          "$APKSIGNER" sign --ks /tmp/istaroth-release.jks --ks-key-alias "$ALIAS" \
+            --ks-pass "pass:$STOREPASS" --key-pass "pass:$KEYPASS" \
+            --out downloads/Project-Istaroth.apk /tmp/Project-Istaroth-aligned.apk
+          "$APKSIGNER" verify --verbose --print-certs downloads/Project-Istaroth.apk
+          "$AAPT" dump badging downloads/Project-Istaroth.apk | head -25
+          python3 - <<'PY'
+          import re,subprocess,zipfile
+          from pathlib import Path
+          apk=Path("downloads/Project-Istaroth.apk")
+          assert apk.stat().st_size>30000
+          meta=subprocess.check_output(
+              ["/usr/local/lib/android/sdk/build-tools/37.0.0/aapt","dump","badging",str(apk)],
+              text=True)
+          assert "versionName='2.1.3'" in meta,meta
+          assert re.search(r"versionCode='(\d+)'",meta) is not None
+          assert "application-label:'Project Istaroth (fka Class Clock)'" in meta
+          assert "name='app.pup.classclock'" in meta
+          with zipfile.ZipFile(apk) as z:
+              html=z.read("assets/www/index.html").decode()
+              assert "Project Istaroth (fka Class Clock)" in html
+              assert "V.2.1.3" in html
+              assert "assets/www/app.js" in z.namelist()
+          print("APK metadata, JS assets, version and package ID: PASS")
+          PY
+          sha256sum downloads/Project-Istaroth.apk
+          ls -lh downloads/Project-Istaroth.apk
+          rm -f /tmp/istaroth-release.jks
+      - name: Attach candidate APK to workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-istaroth-v2.1.3
+          path: downloads/Project-Istaroth.apk
+          retention-days: 30
+      - name: Commit verified binary to the release branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads/Project-Istaroth.apk
+          if git diff --cached --quiet; then
+            echo "Binary unchanged."
+          else
+            git commit -m "build(android): include signed Project Istaroth 2.1.3 APK [skip ci]"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
