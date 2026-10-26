@@ -31,11 +31,12 @@ test("Admin route retains its authentication workflow under new name",()=>{
  assert.match(html,/admin\.js\?v=10/);
 });
 
-test("Download route explains why existing APK binaries retain Class Clock",()=>{
+test("Download FAQ explains Project Istaroth branding and keeps legacy APK assets",()=>{
  const html=read("download.html");
  assert.match(html,/<title>Download Project Istaroth \(fka Class Clock\)/);
- assert.match(html,/Formerly Class Clock/);
- assert.match(html,/original Class Clock APK builds/);
+ assert.doesNotMatch(html,/class="app-rename-note"/);
+ assert.match(html,/Is Project Istaroth the same app as Class Clock\?/);
+ assert.match(html,/earlier Android builds \(2\.1\.2 and 2\.0\) still display Class Clock/);
  for(const apk of ["ClassClock.apk","ClassClock-2.0.apk"]){
    assert.match(html,new RegExp('href="downloads/'+apk.replace(/\./g,"\\.")+'"'));
    assert.ok(existsSync(resolve(root,"downloads",apk)),
