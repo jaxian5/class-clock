@@ -1,0 +1,22 @@
+name: Project Istaroth site checks
+
+on:
+  push:
+    branches:
+      - main
+      - 'rebrand/**'
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  identity-and-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check naming, script syntax, and legacy downloads
+        run: node --test tests/*.test.mjs

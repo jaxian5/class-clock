@@ -1324,3 +1324,21 @@ body {
 .hero.after-today .hero-countdown {
     display: none;
 }
+/* Project Istaroth (fka Class Clock) branding: compact stacked identity.
+   Keep the existing clock, controls and BSIT 2-1 context usable on mobile. */
+.header .brand{min-width:0;flex:0 1 auto}
+.header .logo{display:flex;flex-direction:column;gap:5px;min-width:0;
+    color:var(--text);font-size:clamp(.82rem,1.4vw,1rem);letter-spacing:.12em;
+    line-height:1.2}
+.header .logo-project{font-weight:900;white-space:nowrap}
+.header .logo-legacy{font-size:.64rem;font-weight:650;letter-spacing:.045em;
+    color:#a3afbd;white-space:normal}
+@media(max-width:1050px){
+    .header{flex-wrap:wrap;gap:16px}
+    .header-right{margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+}
+@media(max-width:700px){
+    .header .logo{letter-spacing:.065em;font-size:.87rem}
+    .header .logo-legacy{font-size:.59rem}
+    .header-right{width:100%;margin-left:0;justify-content:space-between;gap:8px}
+}

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Clock Admin</title>
+    <title>Project Istaroth (fka Class Clock) | Administration</title>
+    <meta name="description" content="Project Istaroth (fka Class Clock) administration for the BSIT 2-1 timetable and academic tasks.">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="admin.css?v=2">
+    <link rel="stylesheet" href="admin.css?v=3">
 </head>
 <body>
 
@@ -13,13 +14,13 @@
         <div class="brand-wrap">
             <img class="brand-mark" src="favicon.svg" alt="" width="32" height="32">
             <div>
-                <div class="brand">BSIT 2-1</div>
-                <div class="subtitle">ADMINISTRATION</div>
+                <div class="brand">PROJECT ISTAROTH</div>
+                <div class="subtitle">(fka Class Clock) · BSIT 2-1 ADMIN</div>
             </div>
         </div>
 
         <div class="admin-header-actions">
-            <a href="index.html" class="nav-link" title="Back to Class Clock">CLASS CLOCK</a>
+            <a href="index.html" class="nav-link" title="Back to Project Istaroth (fka Class Clock)">PROJECT ISTAROTH</a>
             <button id="sign-out-button" class="sign-out-button" type="button" style="display: none;">
                 SIGN OUT
             </button>
@@ -35,7 +36,7 @@
         <section id="login-screen" class="login-screen">
             <div class="login-card">
                 <div class="login-label">ADMIN ACCESS</div>
-                <h1>Class Clock Admin</h1>
+                <h1>Project Istaroth <small class="admin-legacy-name">(fka Class Clock)</small> Administration</h1>
                 <p>Sign in to manage the schedule for BSIT 2-1.</p>
 
                 <form id="login-form">
@@ -76,7 +77,7 @@
             <div id="schedule-view" class="admin-view">
                 <section class="page-heading">
                     <p class="eyebrow">SCHEDULE MANAGEMENT</p>
-                    <h1>Class Clock Admin</h1>
+                    <h1>Project Istaroth <small class="admin-legacy-name">(fka Class Clock)</small> Administration</h1>
                     <p class="description">
                         Manage today's classes and schedule exceptions.
                     </p>
@@ -242,7 +243,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="admin.js?v=9"></script>
+    <script src="admin.js?v=10"></script>
 
 </body>
 </html>
