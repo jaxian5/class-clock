@@ -1,0 +1,38 @@
+name: Inspect Android 2.1.2 packaging
+on:
+  push:
+    branches: ["release/project-istaroth-android-2.1.3"]
+    paths:
+      - ".github/workflows/apk-inspect.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Inspect original APK, signing certificate, and resources
+        run: |
+          set -euo pipefail
+          ls -lh downloads/ClassClock.apk
+          file downloads/ClassClock.apk
+          unzip -l downloads/ClassClock.apk | head -70
+          find "${ANDROID_HOME:-/opt/android-sdk}/build-tools" -maxdepth 2 -type f -name apksigner | sort -V | tail -2 || true
+          AAPT="$(find "${ANDROID_HOME:-/opt/android-sdk}/build-tools" -maxdepth 2 -type f -name aapt | sort -V | tail -1)"
+          APK_SIGNER="$(find "${ANDROID_HOME:-/opt/android-sdk}/build-tools" -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
+          "$AAPT" dump badging downloads/ClassClock.apk | head -24 || true
+          "$APK_SIGNER" verify --print-certs downloads/ClassClock.apk || true
+          curl --fail --location --retry 3 --silent --show-error -o /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar
+          echo "56d59c524fc764263ba8d345754d8daf55b1887818b15cd3b594f555d249e2db  /tmp/apktool.jar" | sha256sum -c
+          java -jar /tmp/apktool.jar d -f downloads/ClassClock.apk -o /tmp/old-app
+          echo '=== decoded files ==='
+          find /tmp/old-app -maxdepth 4 -type f | head -75
+          echo '=== manifest ==='
+          sed -n '1,100p' /tmp/old-app/AndroidManifest.xml
+          echo '=== candidate brand strings ==='
+          grep -rEn -i --include='*.xml' --include='*.smali' --include='*.html' 'class clock|classclock|versionname|app_name' /tmp/old-app | head -110 || true
