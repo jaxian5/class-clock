@@ -45,3 +45,22 @@ test("Release note warns about actual different signing certificate",()=>{
  assert.match(page,/uninstall the old app/);
  assert.match(page,/Back up|back up/i);
 });
+
+test("Formerly Class Clock notice is removed from the top of download page",()=>{
+ assert.doesNotMatch(page,/class="app-rename-note"/);
+ assert.doesNotMatch(page,/\.app-rename-note\s*\{/);
+ const lead=page.match(/<section class="download-lead">([\s\S]*?)<\/section>/)?.[1];
+ assert.ok(lead);
+ assert.match(lead,/<h1>Project Istaroth/);
+ assert.match(lead,/Android app for the BSIT 2-1 schedule/);
+ assert.doesNotMatch(lead,/<p[^>]+class="app-rename-note"/);
+});
+test("FAQ explains new branding and real Android update limits accurately",()=>{
+ assert.match(page,/<summary>Is Project Istaroth the same app as Class Clock\?<\/summary>/);
+ assert.match(page,/<summary>Can I update directly from Class Clock 2\.1\.2 to Project Istaroth 2\.1\.3\?<\/summary>/);
+ assert.match(page,/signed with a different Android certificate/);
+ assert.match(page,/Uninstalling may erase data stored only on your device/);
+ assert.match(page,/<summary>Why does Google Play Protect ask to scan the app\?<\/summary>/);
+ assert.match(page,/<summary>Will Project Istaroth be released on Google Play\?<\/summary>/);
+ assert.match(page,/there is no confirmed date/);
+});
