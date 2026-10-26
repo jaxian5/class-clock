@@ -81,7 +81,7 @@ jobs:
               ["/usr/local/lib/android/sdk/build-tools/37.0.0/aapt","dump","badging",str(apk)],
               text=True)
           assert "versionName='2.1.3'" in meta,meta
-          assert re.search(r"versionCode='(\\d+)'",meta) is not None
+          assert re.search(r"versionCode='(\d+)'",meta) is not None
           assert "application-label:'Project Istaroth (fka Class Clock)'" in meta
           assert "name='app.pup.classclock'" in meta
           with zipfile.ZipFile(apk) as z:
