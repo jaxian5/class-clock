@@ -1671,7 +1671,7 @@ document.addEventListener("click", async function(event) {
 
     const confirmed = confirm(
         "Dismiss this class early?\n\n" +
-        "On the public Class Clock it will become PREVIOUS and the next class (if any) will become NEXT."
+        "On the public Project Istaroth (fka Class Clock) it will become PREVIOUS and the next class (if any) will become NEXT."
     );
 
     if (!confirmed) return;
