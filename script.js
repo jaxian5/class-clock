@@ -112,13 +112,13 @@ function setNotificationUI(message = "") {
             button.classList.add("enabled");
             icon.textContent = "🔔";
             label.textContent = "NOTIFY ON";
-            button.title = "Turn Class Clock notifications off";
+            button.title = "Turn Project Istaroth (fka Class Clock) notifications off";
             if (status) status.textContent = message || "Class notifications are enabled.";
         } else {
             button.classList.add("off");
             icon.textContent = "🔕";
             label.textContent = "NOTIFY OFF";
-            button.title = "Turn Class Clock notifications on";
+            button.title = "Turn Project Istaroth (fka Class Clock) notifications on";
             if (status) status.textContent = message || "Class notifications are OFF.";
         }
     } else if (permission === "denied") {
@@ -146,8 +146,8 @@ async function toggleNotifications() {
         return;
     }
 
-    // If the app is currently enabled, turn Class Clock notifications off.
-    // Browser permission remains granted, but Class Clock stops sending alerts.
+    // If the app is currently enabled, turn Project Istaroth (fka Class Clock) notifications off.
+    // Browser permission remains granted, but Project Istaroth (fka Class Clock) stops sending alerts.
     if (notificationState.enabled) {
         notificationState.enabled = false;
         notificationState.sent.clear();
@@ -180,7 +180,7 @@ async function toggleNotifications() {
 
             setNotificationUI("Notifications enabled. You will get reminders 10 and 5 minutes before class, plus start/end alerts.");
 
-            new Notification("Class Clock", {
+            new Notification("Project Istaroth (fka Class Clock)", {
                 body: "Notifications are now enabled.",
                 tag: "class-clock-enabled"
             });
@@ -243,7 +243,7 @@ function checkClassNotifications() {
             if (!notificationState.sent.has(key) && minutesUntilStart <= 10 && minutesUntilStart > 5) {
                 notificationState.sent.add(key);
                 sendClassNotification(
-                    "Class Clock",
+                    "Project Istaroth (fka Class Clock)",
                     `${classItem.name} starts in about 10 minutes.`,
                     `class-clock-10-${key}`
                 );
@@ -256,7 +256,7 @@ function checkClassNotifications() {
             if (!notificationState.sent.has(key)) {
                 notificationState.sent.add(key);
                 sendClassNotification(
-                    "Class Clock",
+                    "Project Istaroth (fka Class Clock)",
                     `${classItem.name} starts in about 5 minutes.`,
                     `class-clock-5-${key}`
                 );
@@ -269,7 +269,7 @@ function checkClassNotifications() {
             if (!notificationState.sent.has(key)) {
                 notificationState.sent.add(key);
                 sendClassNotification(
-                    "Class Clock",
+                    "Project Istaroth (fka Class Clock)",
                     `${classItem.name} is starting now.`,
                     `class-clock-start-${key}`
                 );
@@ -282,7 +282,7 @@ function checkClassNotifications() {
             if (!notificationState.sent.has(key)) {
                 notificationState.sent.add(key);
                 sendClassNotification(
-                    "Class Clock",
+                    "Project Istaroth (fka Class Clock)",
                     `${classItem.name} has ended.`,
                     `class-clock-end-${key}`
                 );
